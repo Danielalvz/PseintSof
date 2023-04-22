@@ -1,8 +1,10 @@
-Proceso tallerArreglos4
-	Definir matriz, i, j, num, number Como Entero;
+Proceso tallerFuncionesArreglos4
+	Definir matriz, num, number, filas, columnas Como Entero;
 	
 	Dimension num[4,5];
 	Dimension number[4,5];
+	filas<-4;
+	columnas<-5;
 	
 	Dimension matriz[4,5];
 	matriz[0,0] <- 01;
@@ -27,35 +29,37 @@ Proceso tallerArreglos4
     matriz[3,4] <- 20;
 	
 	Escribir "Primer matriz, codigo quemado";
-    Para i <- 0 Hasta 3 Con Paso 1 Hacer
-        Para j <- 0 Hasta 4 Con Paso 1 Hacer
-			Si matriz[i,j] < 10 Entonces
-				Escribir Sin saltar "0", matriz[i,j], " ";
-			SiNo
-				Escribir Sin Saltar matriz[i,j], " ";
-            FinSi   
-        FinPara
-        Escribir "";
-    FinPara
+    mostrarMatrizQuemada(matriz, filas, columnas);
 	
 	Escribir "";
 	Escribir "Segunda matriz automatica";
-	inicializar(num);
+	inicializar(num, filas, columnas);
 	
 	Escribir "";
 	Escribir "Segunda matriz menos quemada";
-	inicializaMatriz(number);
+	inicializaMatriz(number, filas, columnas);
 FinProceso
 
-SubProceso inicializar(num)
+SubProceso mostrarMatrizQuemada(matriz, filas, columnas)
+	Definir i, j Como Entero;
+	
+	Para i <- 0 Hasta filas-1 Con Paso 1 Hacer
+        Para j <- 0 Hasta columnas-1 Con Paso 1 Hacer
+			mostrarMatriz(matriz, i, j);
+        FinPara
+        Escribir "";
+    FinPara
+FinSubProceso
+
+SubProceso inicializar(num, filas, columnas)
 	Definir i, j, contador, disminuye, aumenta, retrocede Como Entero;
 	contador<-1;
 	disminuye<-10;
 	aumenta<-11;
 	retrocede<-20;
 	
-	Para i <- 0 Hasta 3 Con Paso 1 Hacer
-        Para j <- 0 Hasta 4 Con Paso 1 Hacer
+	Para i <- 0 Hasta filas-1 Con Paso 1 Hacer
+        Para j <- 0 Hasta columnas-1 Con Paso 1 Hacer
 			Si i = 0 Entonces
 				num[0,j] <- contador;
 				contador<-contador+1;
@@ -86,13 +90,13 @@ SubProceso mostrarMatriz(num, i, j)
 	FinSi 
 FinSubProceso
 
-SubAlgoritmo inicializaMatriz(number)
+SubProceso inicializaMatriz(number, filas, columnas)
 	Definir i, j Como Entero;
 	
-	Para i <- 0 Hasta 3 Con Paso 1 Hacer
-        Para j <- 0 Hasta 4 Con Paso 1 Hacer
+	Para i <- 0 Hasta filas-1 Con Paso 1 Hacer
+        Para j <- 0 Hasta columnas-1 Con Paso 1 Hacer
             Si i Mod 2 = 0 Entonces //Filas pares
-                number[i,j] <- i*5 + j + 1;
+                number[i,j] <- i* 5+ j + 1;
             Sino
                 number[i,j] <- i*5 + 5 - j; //Filas impares
             FinSi
@@ -100,5 +104,4 @@ SubAlgoritmo inicializaMatriz(number)
         FinPara
 		Escribir "";
     FinPara
-FinSubAlgoritmo
-	
+FinSubProceso
